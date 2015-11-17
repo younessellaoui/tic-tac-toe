@@ -31,20 +31,22 @@ var Box = React.createClass({
    }
 });
 
+/* aidé pour cette exercice non réellement compris*/
 React.render(<Box initialValue ={'X'}/>, document.body);
 
 var Row = React.createClass({
   render: function onRender () {
+    var ligne = ["-","-","-"];
+    //this.props.Lign;
     return (
       <div>
-        <Box initialValue="-" />
-        <Box initialValue="-" />
-        <Box initialValue="-" />
+        {ligne.map(function(lign) {
+          return <Box initialValue={lign} />
+        })}
       </div>
     );
   }
 });
 
 
-
-React.render(<Row/>, document.body);
+React.render(<Row />, document.body);
