@@ -10,32 +10,41 @@ var boxStyle = {
 
 var time = 1000;
 var Box = React.createClass({
-       'getInitialState': function onGestInitialState(){
-            return{
-                'value' : this.props.initialValue
-                  };
-        },
 
-       componentWillMount: function(){
-          var old_this = this;
-          this.timer = setInterval(function(){
+    handleClick: function(){
+        var oldValue = this.state.value;
+        var newValue = oldValue === 'X' ? 'O': 'X';
+        this.setState({
+        value: newValue
+        });
+    },
 
-          var oldValue = old_this.state.value;
-          var newValue = oldValue === 'X' ? 'O': 'X';
-          old_this.setState({
-          value: newValue
-          });
-         }, time);
-       },
+    getInitialState: function() {
+        return {value: this.props.initialValue};
+    },
+    'render': function onRender () {
+    return (
+        <div>
+            <button style={boxStyle} onClick={this.handleClick}>{this.state.value}</button>
+        </div>
+    );
+   }
+});
 
-       componentWillUnmount: function(){
-   clearInterval(this.timer);},
+React.render(<Box initialValue ={'X'}/>, document.body);
 
-  'render': function onRender () {
-      return (
-      <button style = {boxStyle}>{this.state.value}</button>
+var Row = React.createClass({
+  render: function onRender () {
+    return (
+      <div>
+        <Box initialValue="-" />
+        <Box initialValue="-" />
+        <Box initialValue="-" />
+      </div>
     );
   }
 });
 
-React.render(<Box initialValue='X'/>, document.body);
+
+
+React.render(<Row/>, document.body);
